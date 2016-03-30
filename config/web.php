@@ -24,7 +24,8 @@ $config = [
             'dsn'       => 'mysql:host=localhost;dbname=vr',
             'username'  => 'root',
             'password'  => '',
-            'charset'   => 'utf8'
+            'charset'   => 'utf8',
+            'tablePrefix'=>'vr_'
         ],
         'urlManager' => [
             'class' => 'yii\web\UrlManager',

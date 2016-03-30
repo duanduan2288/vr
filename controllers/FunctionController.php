@@ -24,7 +24,7 @@ class FunctionController extends Controller
             $search_action=(isset($_GET['search_action']))?$_GET['search_action']:'';
 
             $querylist = new Query();
-            $querylist->select('*')->from('vr_auth_function');
+            $querylist->select('*')->from('{{%auth_function}}');
             $querylist->where("1=1");
             if (!empty($search_controller)) {
                 $querylist->andWhere("controller LIKE '%{$search_controller}%'");
@@ -99,8 +99,8 @@ class FunctionController extends Controller
             $transaction = $connection->beginTransaction();
             try {
                 $info = $this->loadModel($id);
-                $connection->createCommand()->delete("vr_auth_function", "id={$id}")->execute();
-                $connection->createCommand()->delete("vr_auth_menu_function", "function_id={$id}")->execute();
+                $connection->createCommand()->delete("{{%auth_function}}", "id={$id}")->execute();
+                $connection->createCommand()->delete("{{%auth_menu_function}}", "function_id={$id}")->execute();
 
                 $transaction->commit();
             } catch(Exception $e) {

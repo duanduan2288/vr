@@ -18,11 +18,11 @@
                     $query = new Query;
                     $children =$query
                         ->select('t.*')
-                        ->from('vr_auth_menu as t')
+                        ->from('{{%auth_menu}} as t')
                         ->where("a.user_id = {$uid} AND t.parent_id={$one['id']} AND t.deleted='否'")
                         ->distinct(true)
-                        ->innerJoin('vr_auth_role_menu r','r.menu_id=t.id')
-                        ->innerJoin('vr_auth_user_role a','r.role_id=a.role_id')
+                        ->innerJoin('{{%auth_role_menu}} r','r.menu_id=t.id')
+                        ->innerJoin('{{%auth_user_role}} a','r.role_id=a.role_id')
                         ->orderBy('t.weight asc')
                         ->createCommand()->queryAll();
                  ?>
@@ -55,7 +55,7 @@
                         $query = new Query;
                         $funs =$query
                             ->select('function_id')
-                            ->from('vr_auth_menu_function')
+                            ->from('{{%auth_menu_function}}')
                             ->where("menu_id = {$one['id']}")
                             ->createCommand()->queryColumn();
                         $controller = Yii::$app->controller->id;

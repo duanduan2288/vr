@@ -20,7 +20,7 @@ class AuthMenuFunction extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'vr_auth_menu_function';
+        return '{{%auth_menu_function}}';
     }
 
     /**

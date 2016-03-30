@@ -18,8 +18,8 @@ class MenuController extends Controller
         if(!empty($uid)){
             // 所有的顶级菜单
              $query = new Query();
-             $query->select('id,name,platform')
-                            ->from('vr_auth_menu')
+             $query->select('id,name')
+                            ->from('{{%auth_menu}}')
                             ->where('parent_id = 0 and deleted = "否"')
                             ->orderBy('weight asc');
             $parent_menus = $query->createCommand()->queryAll();
@@ -31,7 +31,7 @@ class MenuController extends Controller
             $order=(isset($_GET['order']))?$_GET['order']:'';
 
             $querylist = new Query();
-            $querylist->select('*')->from('vr_auth_menu');
+            $querylist->select('*')->from('{{%auth_menu}}');
             $querylist->where("1=1");
             if (!empty($search_name))
             {
@@ -99,7 +99,7 @@ class MenuController extends Controller
                 $model = $this->loadModel($id);
                 $query = new Query();
                 $query->select('function_id')
-                        ->from('auth_menu_function')
+                        ->from('{{%auth_menu_function}}')
                         ->where("menu_id = {$id}")
                         ->orderBy('id desc');
                 $menu_functions = $query->createCommand()->queryColumn();
@@ -108,40 +108,28 @@ class MenuController extends Controller
             {
                 $model = new AuthMenu;
             }
-            $platform=(isset($_GET['type'])&&$_GET['type']=='2')?'注册商':'注册局';
-            $type=(isset($_GET['type'])&&$_GET['type']=='2')?'2':'1';
             // 所有的顶级菜单
             $query = new Query();
-            $query->select('id,name,platform')
-                ->from('auth_menu')
-                ->where('parent_id = 0 and platform = "'.$platform.'" and deleted = "否"')
+            $query->select('id,name')
+                ->from('{{%auth_menu}}')
+                ->where('parent_id = 0 and deleted = "否"')
                 ->orderBy('weight asc');
             $parent_menus = $query->createCommand()->queryAll();
 
     		// all function
             $queryf = new Query();
-            $queryf->select('id,controller,action,platform')
-                ->from('auth_function')
-                ->where('platform = "'.$platform.'"')
+            $queryf->select('id,controller,action')
+                ->from('{{%auth_function}}')
                 ->orderBy('id desc');
             $functions = $queryf->createCommand()->queryAll();
 
             if(isset($_POST['Menu']))
             {
 
-                $before_edit = $id != '' ? json_encode($model->attributes) : '';
-                $type_id = '1009';
-                $type_s = '添加菜单';
                 $model->created = new Expression('NOW()');
                 $model->modified = new Expression('NOW()');
                 $model->default_menu= 0 ;
                 $model->attributes = $_POST['Menu'];
-
-                if($id)
-                {
-                    $type_id = '1010';
-                    $type_s = '修改菜单';
-                }
                 $connection = Yii::$app->db;
                 $transaction = $connection->beginTransaction();
     			try {
@@ -150,7 +138,7 @@ class MenuController extends Controller
 
                     if ($id != '')
                     {
-                        $connection->createCommand()->delete("auth_menu_function", "menu_id={$id}")->execute();
+                        $connection->createCommand()->delete("{{%auth_menu_function}}", "menu_id={$id}")->execute();
                     }
     			    if (!empty($_POST['function']))
                     {
@@ -164,10 +152,6 @@ class MenuController extends Controller
     			    		$amf->save();
     			    	}
     			    }
-                    //记录操作日志
-                    ServiceOperationLog::create_operation_log(json_encode($model->attributes),$before_edit,$type_s,
-                        '/menu/create',$uid);
-
     			    $transaction->commit();
                 } catch(Exception $e) {
 
@@ -180,9 +164,7 @@ class MenuController extends Controller
                 'model'=>$model,
                 'parent_menus'=>$parent_menus,
                 'functions'=>$functions,
-                'menu_functions'=>$menu_functions,
-                'platform'=>$platform,
-                'type'=>$type
+                'menu_functions'=>$menu_functions
                 ));
         }else{
            return $this->redirect('/site/login');
@@ -193,18 +175,15 @@ class MenuController extends Controller
     {
         $uid = Yii::$app->user->id;
         if(!empty($uid)){
-            $type=(isset($_GET['type'])&&$_GET['type']=='2')?'2':'1';
           	$connection = Yii::$app->db;
           	$transaction = $connection->beginTransaction();
     		try {
                 $info = $this->loadModel($id);
                 $s = $info['deleted']=='是'?'否':'是';
-                $connection->createCommand()->update('auth_menu', [
+                $connection->createCommand()->update('{{%auth_menu}}', [
                             'deleted' => $s,
                         ], "id={$id}")->execute();
 
-                //记录操作日志
-                ServiceOperationLog::create_operation_log('',json_encode($info->attributes),'删除菜单','/menu/delete',$uid);
     			$transaction->commit();
     		} catch(Exception $e) {
     			$transaction->rollBack();

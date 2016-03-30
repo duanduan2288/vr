@@ -38,10 +38,10 @@
             $user_id = Yii::$app->user->id;
             $query = new Query;
             $query->select('t.*')
-                ->from('vr_auth_menu as t')
+                ->from('{{%auth_menu}} as t')
                 ->where("a.user_id={$user_id} AND t.parent_id=0 AND t.deleted='否'")
-                ->innerJoin('vr_auth_role_menu r','r.menu_id=t.id')
-                ->innerJoin('vr_auth_user_role a','r.role_id=a.role_id')
+                ->innerJoin('{{%auth_role_menu}} r','r.menu_id=t.id')
+                ->innerJoin('{{%auth_user_role}} a','r.role_id=a.role_id')
                 ->orderBy('t.weight asc');
             $command = $query->createCommand();
             $sql = $command->sql;
@@ -54,10 +54,10 @@
             $controller = Yii::$app->controller->id;
             $action = Yii::$app->controller->action->id;
             $user_id = Yii::$app->user->id;
-            $sql = "SELECT m1.id FROM vr_auth_menu m1
-						INNER JOIN  vr_auth_menu m2 ON m1.id = m2.parent_id
-						INNER JOIN  vr_auth_menu_function ON m2.id = vr_auth_menu_function.menu_id
-						INNER JOIN  vr_auth_function ON vr_auth_menu_function.function_id = vr_auth_function.id AND action='{$action}' AND controller='{$controller}'
+            $sql = "SELECT m1.id FROM {{%auth_menu}} m1
+						INNER JOIN  {{%auth_menu}} m2 ON m1.id = m2.parent_id
+						INNER JOIN  {{%auth_menu_function}} ON m2.id = {{%auth_menu_function}}.menu_id
+						INNER JOIN  {{%auth_function}} ON {{%auth_menu_function}}.function_id = {{%auth_function}}.id AND action='{$action}' AND controller='{$controller}'
 						WHERE m1.parent_id = 0 AND m1.deleted = '否'";
             $db = Yii::$app->db->createCommand ( $sql );
             $result = $db->queryAll ();

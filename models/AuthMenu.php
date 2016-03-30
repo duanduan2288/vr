@@ -29,7 +29,7 @@ class AuthMenu extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'vr_auth_menu';
+        return '{{%auth_menu}}';
     }
 
     /**
