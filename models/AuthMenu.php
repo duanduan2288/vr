@@ -17,7 +17,6 @@ use Yii;
  * @property string $image
  * @property string $target
  * @property string $default_menu
- * @property string $platform
  * @property string $deleted
  * @property string $created
  * @property string $modified
@@ -40,7 +39,7 @@ class AuthMenu extends \yii\db\ActiveRecord
         return [
             [['name', 'created', 'modified'], 'required'],
             [['weight', 'parent_id'], 'integer'],
-            [['target', 'default_menu', 'platform', 'deleted'], 'string'],
+            [['target', 'default_menu', 'deleted'], 'string'],
             [['created', 'modified'], 'safe'],
             [['name', 'name_en'], 'string', 'max' => 100],
             [['description', 'link', 'image'], 'string', 'max' => 500]
@@ -63,7 +62,6 @@ class AuthMenu extends \yii\db\ActiveRecord
             'image' => 'Image',
             'target' => 'Target',
             'default_menu' => 'Default Menu',
-            'platform' => 'Platform',
             'deleted' => 'Deleted',
             'created' => 'Created',
             'modified' => 'Modified',

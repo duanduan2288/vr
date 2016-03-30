@@ -30,7 +30,7 @@
                         <div class="form-group">
                             <label class="col-md-3 control-label"><strong>用户</strong></label>
                             <div class="col-md-3">
-                                <input disabled type="text" name="username" value="<?php echo $user->last_name.'&nbsp;'.$user->first_name; ?>" class="form-control" >
+                                <input disabled type="text" name="username" value="<?php echo $user->logonName; ?>" class="form-control" >
                             </div>
                         </div>
                         <div class="form-group">
@@ -38,7 +38,7 @@
                             <div class="col-md-2">
                                 <select name="role_id" class="form-control">
                                     <?php foreach ($roles as $key => $value) : ?>
-                                    <option value="<?php echo $value['id'] ?>" <?php echo in_array($value['id'], $user_has_role) ? 'selected' : '';?>><?php echo $value['platform'].'/'.$value['name']; ?></option>
+                                    <option value="<?php echo $value['id'] ?>" <?php echo in_array($value['id'], $user_has_role) ? 'selected' : '';?>><?php echo $value['name']; ?></option>
                                     `<?php endforeach; ?>
                                 </select>
                             </div>

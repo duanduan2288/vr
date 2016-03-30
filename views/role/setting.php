@@ -8,7 +8,7 @@
             <div class="portlet-title">
                 <div class="caption cap-head">
                     <i class="icon icon-cog"></i>
-                    <a>系统管理&nbsp;&nbsp;<i class="icon-angle-right"></a></i>
+                    <a>用户管理&nbsp;&nbsp;<i class="icon-angle-right"></a></i>
                     <a href="#">权限设置</a>
                 </div>
                 <div class="tools">
@@ -20,7 +20,7 @@
             <form id="myform" class="form-horizontal" enctype="multipart/form-data" action="/role/save" method="post">
                 <input id='role_id' type="hidden" name='role_id' value="<?php echo $role['id']; ?>">
                 <div class="form-body">
-                    <h3 class="form-section"><?php echo $role['platform'].':'.$role['name']; ?></h3>
+                    <h3 class="form-section"><?php echo $role['name']; ?></h3>
                     <?php if (!empty($menus)) : ?>
                     <?php foreach ($menus as $key => $value) : ?>
                         <?php if ($value['parent_id']==0) : ?>

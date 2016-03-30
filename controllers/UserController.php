@@ -237,8 +237,10 @@ class UserController extends Controller
      * @param  [type] $id [description]
      * @return [type]     [description]
      */
-    public function actionDelete($id)
+    public function actionDelete()
     {
+        $id = Yii::$app->request->get('id','');
+
         $uid = Yii::$app->user->id;
         if(empty($uid)) $this->error('请先登录');
 
@@ -253,7 +255,9 @@ class UserController extends Controller
 	        				'status' => $sta,
 	        			], "id={$user_id}")->execute();
         if ($status>0) {
-        	return $this->redirect(array('/user/index'));
+            $this->success('删除成功');
+        }else{
+            $this->error('删除失败');
         }
     }
 
@@ -271,12 +275,12 @@ class UserController extends Controller
       	$user = $this->loadModel($id);
 		$query = new Query();
         $query->select('id,name')
-				->from('auth_role');
+				->from('{{%auth_role}}');
 		$roles = $query->createCommand()->queryAll();
         $queryrole = new Query();
 
         $queryrole->select('role_id')
-            ->from('vr_auth_user_role')
+            ->from('{{%auth_user_role}}')
             ->where("user_id = $id");
         $user_has_role = $queryrole->createCommand()->queryColumn();
 
@@ -298,18 +302,18 @@ class UserController extends Controller
 			$user_id = trim($_POST['user_id']);
 			$model = $this->loadModel($user_id);
 			if (!empty($model)) {
-                $user_role = $model->user_role;
+                $user_role = $model->userRole;
 
 				$connection = Yii::$app->db;
 				$transaction = $connection->beginTransaction();
 				try {
                     $query = new Query();
                     $query->select('role_id')
-                            ->from('vr_auth_user_role')
+                            ->from('{{%auth_user_role}}')
                             ->where("user_id = {$user_id}");
                     $roles = $query->createCommand()->queryColumn();
 
-                    $connection->createCommand()->delete("vr_auth_user_role","user_id = {$user_id}")->execute();
+                    $connection->createCommand()->delete("{{%auth_user_role}}","user_id = {$user_id}")->execute();
 
     			    if (!empty($_POST['role_id'])) {
 		    			$amf = new AuthUserRole();
@@ -317,8 +321,8 @@ class UserController extends Controller
 			    		$amf->role_id = trim($_POST['role_id']);
 			    		$amf->created = date('Y-m-d H:i:s',time());
 			    		$amf->save();
-                        $connection->createCommand()->update('vr_admin', [
-                            'user_role' => trim($_POST['role_id'])
+                        $connection->createCommand()->update('{{%admin}}', [
+                            'userRole' => trim($_POST['role_id'])
                         ], "id={$user_id}")->execute();
     			    }
     			    $transaction->commit();

@@ -71,7 +71,7 @@
                                 <select name="Menu[parent_id]" class="form-control">
                                     <option value="0" <?php echo $model->parent_id == 0 ? 'selected' : '';?>>顶级菜单</option>
                                     <?php foreach ($parent_menus as $item): ?>
-                                        <option value="<?php echo $item['id']; ?>" <?php echo $model->parent_id == $item['id'] ? 'selected' : '';?>><?php echo $item['platform'].':'.$item['name']; ?></option>
+                                        <option value="<?php echo $item['id']; ?>" <?php echo $model->parent_id == $item['id'] ? 'selected' : '';?>><?php echo $item['name']; ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
@@ -95,7 +95,7 @@
                                 <select multiple="multiple" class="multi-select" id="my_multi_select1" name="function[]">
                                     <?php if(!empty($functions)) : ?>
                                         <?php foreach ($functions as $value) : ?>
-                                            <option value='<?php echo $value['id']; ?>' <?php echo in_array($value['id'], $menu_functions)? 'selected' : ''; ?>><?php echo $value['platform'].':'.$value['controller'].'/'.$value['action']; ?></option>
+                                            <option value='<?php echo $value['id']; ?>' <?php echo in_array($value['id'], $menu_functions)? 'selected' : ''; ?>><?php echo $value['controller'].'/'.$value['action']; ?></option>
                                         <?php endforeach; ?>
                                     <?php endif; ?>
                                 </select>

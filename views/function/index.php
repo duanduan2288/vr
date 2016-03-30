@@ -67,8 +67,8 @@
                                     <td><?php echo $list['name']?></td>
                                     <td><?php echo $list['created']?></td>
                                     <td>
-                                    		<a class="delete" href="<?php echo Yii::$app->getUrlManager()->createUrl(['function/create','id' => $list['id'],'type' => $type]); ?>">设置</a>&nbsp;&nbsp;
-                                    		<a onclick="return confirm('您确定要删除吗')" href="<?php echo Yii::$app->getUrlManager()->createUrl(['function/delete','id' => $list['id'],'type' => $type]); ?>" class="delete">删除</a>
+                                    		<a class="delete" href="<?php echo Yii::$app->getUrlManager()->createUrl(['function/create','id' => $list['id']]); ?>">设置</a>&nbsp;&nbsp;
+                                    		<a onclick="return confirm('您确定要删除吗')" href="<?php echo Yii::$app->getUrlManager()->createUrl(['function/delete','id' => $list['id']]); ?>" class="delete">删除</a>
                                     </td>
                                 </tr>
                             <?php } ?>

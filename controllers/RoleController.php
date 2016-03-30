@@ -24,7 +24,7 @@ class RoleController extends Controller
             $search_name=(isset($_GET['search_name']))?$_GET['search_name']:'';
 
             $querylist = new Query();
-            $querylist->select('*')->from('auth_role');
+            $querylist->select('*')->from('{{%auth_role}}');
             $querylist->where("1=1");
 
             if (!empty($search_name)) {
@@ -81,7 +81,7 @@ class RoleController extends Controller
             {
                 $model = new AuthRole;
             }
-            return $this->render('create',array('model'=>$model,'menus'=>$menus,'role_has_menus'=>$role_has_menus,'platform'=>$platform,'type'=>$type));
+            return $this->render('create',array('model'=>$model,'menus'=>$menus,'role_has_menus'=>$role_has_menus));
         }
         else
         {

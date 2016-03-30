@@ -11,9 +11,7 @@ use Yii;
  * @property string $guid
  * @property string $name
  * @property string $name_en
- * @property string $platform
  * @property string $type
- * @property integer $registrar_id
  * @property integer $creator
  * @property string $created
  */
@@ -34,8 +32,8 @@ class AuthRole extends \yii\db\ActiveRecord
     {
         return [
             [['guid', 'creator', 'created'], 'required'],
-            [['platform', 'type'], 'string'],
-            [['registrar_id', 'creator'], 'integer'],
+            [['type'], 'string'],
+            [['creator'], 'integer'],
             [['created'], 'safe'],
             [['guid', 'name_en'], 'string', 'max' => 100],
             [['name'], 'string', 'max' => 50]
@@ -52,9 +50,7 @@ class AuthRole extends \yii\db\ActiveRecord
             'guid' => 'Guid',
             'name' => 'Name',
             'name_en' => 'Name En',
-            'platform' => 'Platform',
             'type' => 'Type',
-            'registrar_id' => 'Registrar ID',
             'creator' => 'Creator',
             'created' => 'Created',
         ];

@@ -114,24 +114,23 @@
         }
 
         $('.open').click(function(){
-
             var user_id = $(this).attr('data-id');
             var type = $(this).attr('data-value');
             if ( confirm('确定进行此操作吗?')) {
                 $.ajax({
                     type: 'POST',
-                    url: '/user/ip-manage',
-                    data: {'user_id':user_id,'ip_limit':name,'ip_limit_flag':'是'},
+                    url: '/user/delete',
+                    data: {'id':user_id},
                     dataType:'json',
                     success: function (r) {
                         if('err'==r.info){
                             common_layer(r.data,location.href);
                         }else{
-                            common_layer('开启IP限制成功',location.href);
+                            common_layer(r.data,location.href);
                         }
                     },
                     error: function () {
-                        common_layer('开启IP限制失败，请稍后重试',location.href);
+                        common_layer('删除失败，请稍后重试',location.href);
                     }
                 });
             }

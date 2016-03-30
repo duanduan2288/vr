@@ -86,8 +86,8 @@
                                     <td><span class="label label-sm label-<?php echo $list['deleted']=='否'?'success':'danger'; ?>"><?php echo $list['deleted']?></span></td>
                                     <td><?php echo $list['created']?></td>
                                     <td>
-                                        <a class="delete" href="<?php echo Yii::$app->getUrlManager()->createUrl(['menu/create','id' => $list['id'],'type' => $type]); ?>">编辑</a>&nbsp;&nbsp;
-                                        <a onclick="return confirm('您确定要删除吗')" href="<?php echo Yii::$app->getUrlManager()->createUrl(['menu/delete', 'id' => $list['id'],'type' => $type]); ?>" class="delete"><?php echo $list['deleted'] == '是' ? '恢复' : '删除'; ?></a>
+                                        <a class="delete" href="<?php echo Yii::$app->getUrlManager()->createUrl(['menu/create','id' => $list['id']]); ?>">编辑</a>&nbsp;&nbsp;
+                                        <a onclick="return confirm('您确定要删除吗')" href="<?php echo Yii::$app->getUrlManager()->createUrl(['menu/delete', 'id' => $list['id']]); ?>" class="delete"><?php echo $list['deleted'] == '是' ? '恢复' : '删除'; ?></a>
                                     </td>
                                 </tr>
                             <?php } ?>
