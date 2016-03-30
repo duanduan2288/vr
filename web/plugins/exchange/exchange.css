@@ -1,0 +1,57 @@
+/******************add by ryq *********/
+#J_imageView,.J_imageView{
+  /*background-color: #E8EFF7; */
+  display: block; 
+  margin: 10px 0px 0px;
+  overflow: hidden;
+}
+#exchange_ul,.exchange_ul{
+  margin: 15px 0;
+  padding: 0;
+}
+
+#exchange_ul,.exchange_ul {
+  width:auto;
+}
+#exchange_ul,.exchange_ul li {
+  list-style:none;
+  float:left;
+  margin-right:10px;
+  margin-bottom: 10px;
+  display: inline;
+  position: relative;
+}
+#exchange_ul,.exchange_ul li div {
+  display: none;
+  position: absolute;
+  top:0;
+  left:0;
+  height:25px;
+  line-height: 25px;
+  background-color: #333;
+  opacity: 0.8;
+  -moz-opacity: 0.8;
+  filter:alpha(opacity=80);
+  /*color:red;*/
+  color:white;
+  width:100%;
+}
+#exchange_ul,.exchange_ul li:hover div {
+  display: block;
+}
+#exchange_ul,.exchange_ul li div span {
+  cursor:pointer;
+}
+#exchange_ul,.exchange_ul img {
+  /*width:150px;*/
+  height:100px;
+}
+#exchange_ul,.exchange_ul .none {display:none;}
+#exchange_ul,.exchange_ul .d1 {
+  margin:15px 0 ;
+  clear:both;
+  text-align:center;
+}
+
+
+/**************************end **************/

@@ -1,0 +1,38 @@
+/***
+No header navbar,No sidebar
+***/
+
+.page-header-fixed .page-container {
+  margin-top: 0px;  
+}
+
+.page-content {  
+  margin-top: 0px; 
+  margin-left: 0px;  
+}
+
+.ie8 .page-content { 
+	margin-top: 0px; 
+    margin-left: 0px; 
+}
+.breadcrumb{
+    margin-top: 0px;
+}
+/*提示问号*/
+.fa {display: inline-block;font-family: FontAwesome;font-style: normal;font-weight: normal;line-height: 1;-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;}
+.fa-question-circle:before {content: "\f059";}
+.help-tips{display:inline-block;position:relative;}
+.help-tips i{padding:0;background:none;color:#83b62b;font-size:20px;}
+.help-tips:hover .tips-info{display:block;}
+.tips-info{display:none;font-size:12px;color:#222;position:absolute;padding:5px 10px;line-height:20px;border:1px solid #ccc;border-radius:5px;box-shadow:0 1px 1px 1px #fafafa;z-index:9;background:#fff;}
+.tips-info:after{content:"";display:block;width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;position:absolute;}
+.tips-left{left:-175px;}
+.tips-left:after{left:177px;}
+.tips-right{left:-7px;}
+.tips-right:after{left:10px;}
+.tips-center{left:-95px;}
+.tips-center:after{left:97px;}
+.tips-up{bottom:120%;}
+.tips-up:after{border-top:6px solid #ccc;bottom:-6px;}
+.tips-bottom{top:100%;}
+.tips-bottom:after{border-bottom:6px solid #ccc;top:-6px;}

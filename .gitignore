@@ -1,0 +1,8 @@
+# ---> Yii
+.idea
+/web/assets/*
+/runtime/*
+!/runtime/.gitignore
+themes/classic/views/
+tests/
+

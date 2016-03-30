@@ -1,0 +1,43 @@
+.i-cont {color: #FFF;position: relative;width:85px;padding: 5px;}
+.i-cont #sel-icon {color: #FFF;font-size:12px;font-family:"微软雅黑"; text-decoration:none;}
+.i-cont #sel-icon:hover{color:#fff;font-size:12px; font-family:"微软雅黑"; text-decoration:underline;}
+.i-cont i {font-size: 30px;}
+.icons-cont {
+    position: absolute;
+    top: -110px;
+    left: 83px;
+    border: 1px solid #cccccc;
+    padding: 5px;
+    background-color: #FFF;
+    z-index: 10001;
+    padding: 5px;
+    width: 485px;
+    display: none;
+}
+.icons-cont .nav{margin-bottom:5px;}
+.nav{display:block;	margin-bottom: 20px;margin-left:0; padding-left:10px;list-style: none;font-size:12px; font-family:"微软雅黑";}
+.nav-tabs:before,.nav-tabs:after {display: table;line-height: 0;content: "";}
+.nav-tabs:after {clear: both;}
+.nav-tabs {border-bottom: 1px solid #ddd;*zoom: 1;}
+.nav-tabs>li {margin-bottom: -1px;}
+.nav-tabs>li>a {padding-top:8px;padding-bottom:8px;line-height:20px; border:1px solid transparent;-webkit-border-radius:4px 4px 0 0;-moz-border-radius:4px 4px 0 0;border-radius:4px 4px 0 0 !important;}
+.nav-tabs>li>a:hover,.nav-tabs>li>a:focus {border-color: #eee #eee #ddd;}
+.nav-tabs>.active>a,.nav-tabs>.active>a:hover,.nav-tabs>.active>a:focus {color: #555;cursor: default;background-color: #fff;border: 1px solid #ddd;border-bottom-color: transparent;}
+.tab-content {overflow: visible;}
+.icon_list {list-style: none;margin: 0;padding: 0;overflow-y:scroll;height:100%;max-height:301px;}
+.icon_list li {float: left;padding: 3px;border: 1px solid #FFF;cursor: pointer;}
+.icon_list li i {font-size: 30px;}
+.icon_list li:hover {border: 1px solid #5b98a5;}
+.tile-themed {background-color:#368ee0;background-repeat:repeat;color:#fff;}
+.tile-themed > i {color: #fff;}
+.tile-themed .tile-info {color: #fff;}
+.icon-bullhorn {background-position: -24px -144px}
+.tab-content {overflow: auto;}
+.tab-content>.tab-pane,.pill-content>.pill-pane {display: none;}
+.tab-content>.active,.pill-content>.active {display: block;}
+/*.fade {opacity: 0;-webkit-transition: opacity .15s linear;-moz-transition: opacity .15s linear;-o-transition: opacity .15s linear;transition: opacity .15s linear;}
+.fade.in {opacity: 1;}*/
+.ico-views {font-size: 20px;color: #fff;padding: 9px;}
+
+
+

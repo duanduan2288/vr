@@ -1,0 +1,8 @@
+#ie9-tips{display:none;overflow:hidden;height:43px;color:#f48c12;font-size:12px;poation:relative;}
+#ie9-tips #tipsPanel{position:absolute;top:0px; left:0px;width:100%;border:1px solid #f9f2a7;border-right:0;border-left:0;background-color:#fefded;line-height:36px}
+#ie9-tips #tipsPanel #tipsDesc{ float:left;margin-left:10px;font-weight:bold; text-align:center;}
+#ie9-tips #tipsPanel #stopSuggestA{ float:right;display:blcok;margin-right:10px;text-decoration:none}
+.clearfix {
+float: none;
+clear: both;
+}

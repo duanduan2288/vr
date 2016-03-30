@@ -1,0 +1,41 @@
+<?php
+return [
+    'upload'=>[
+        'attachment_root_dir'=>'/udiska/upload',
+        'telepbone_attachment_dir'=>'/udiska/www/com.itmnic.audit/web/upload'
+    ],
+    'socket'=>[
+        'hostname'=>'10.10.59.102',
+        'port'=>'3005'
+    ],
+    'admin_emails'=>[
+        'email'=>'noreply@itmnic.com',
+        'password'=>'itm123ITM!@#'
+    ],
+    'admin_phones'=>[
+        'corp_id'=>'wj1813',
+        'corp_pwd'=>'5688rj',
+        'corp_service'=>'1755961413',
+        'url'=>'http://cloud.hbsmservice.com:8080/sms_send2.do'
+    ],
+    'registrant_change_webservice'=>[
+        'url'=>'http://202.173.14.58:9944/webservice/RegistrantChangeAuthGreenChannelService?wsdl'//过户审核
+    ],
+    'reg_auth_green_webservice'=>[
+        'url'=>'http://202.173.14.58:9944/webservice/RegAuthGreenChannelService?wsdl'//新注审核
+    ],
+    'domain_server_webservice'=>[
+        'url'=>'http://202.173.14.58:9944/webservice/DomainServerStatusService?wsdl' //server状态
+    ],
+    'webservice'=>[
+        'url'=>'http://202.173.14.58:9944/webservice/AuditService?wsdl'
+    ],
+    'AuditStatewebservice'=>[
+        'url'=>'http://202.173.14.58:9944/webservice/DomainAuditStateService?wsdl'
+    ],
+    //admin
+    'audit_admin'=>[
+        'username'=>'huyi',
+        'password'=>'a088b1cd00a91e4a02e153e1d60c3d00c4815e28'
+    ]
+];
