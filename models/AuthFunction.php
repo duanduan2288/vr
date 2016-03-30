@@ -23,7 +23,7 @@ class AuthFunction extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'vr_auth_function';
+        return '{{%auth_function}}';
     }
 
     /**

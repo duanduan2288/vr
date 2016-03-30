@@ -18,7 +18,7 @@ class AuthRoleMenu extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'vr_auth_role_menu';
+        return '{{%auth_role_menu}}';
     }
 
     /**

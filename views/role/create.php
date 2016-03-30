@@ -8,8 +8,8 @@
             <div class="portlet-title">
                 <div class="caption cap-head">
                     <i class="icon icon-cog"></i>
-                    <a>系统管理&nbsp;&nbsp;<i class="icon-angle-right"></a></i>
-                    <a href="#">添加<?php echo $platform; ?>角色</a>
+                    <a>用户管理&nbsp;&nbsp;<i class="icon-angle-right"></a></i>
+                    <a href="#">添加角色</a>
                 </div>
                 <div class="tools">
                     <a href="javascript:location.reload();"><i class="icon-refresh"></i>刷新</a>&nbsp;&nbsp;
@@ -20,16 +20,7 @@
             <div class="portlet-body form">
                 <form role="form" id="myform" class="form-horizontal validate" enctype="multipart/form-data" method="post">
                     <input id="role_id" type="hidden" name='id' value="<?php echo $model->id; ?>">
-                    <input id="role_type" type="hidden" value="<?php echo $type; ?>">
-                    <input id="role_platform" type="hidden" value="<?php echo $platform; ?>">
                     <div class="form-body">
-                        <div class="form-group">
-                            <label class="col-md-3 control-label"><strong>所属<span class="required">*</span></strong></label>
-                            <div class="col-md-3">
-                                <input type="text" class="form-control required" value="<?php echo $platform; ?>" disabled  />
-                                <input type="hidden" name="Role[platform]" value="<?php echo $platform; ?>"  />
-                            </div>
-                        </div>
                         <div class="form-group">
                             <label class="col-md-3 control-label"><strong>角色中文名称<span class="required">*</span></strong></label>
                             <div class="col-md-3">
@@ -38,15 +29,6 @@
                             </div>
                             <span class="help-inline">角色名称不要超过50字</span>
                         </div>
-                        <div class="form-group">
-                            <label class="col-md-3 control-label"><strong>角色英文名称</strong></label>
-                            <div class="col-md-3">
-                                <input id="role_name_en" type="text" name="Role[name_en]" value="<?php echo $model->name_en; ?>" class="form-control" data-rule-maxlength="50" data-msg-maxlength="角色英文名称不要超过50字">
-                                <span class="help-block"></span>
-                            </div>
-                            <span class="help-inline">角色英文名称不要超过50字</span>
-                        </div>
-
                         <?php if (!empty($menus)) : ?>
                             <div class="form-group">
                                 <label class="col-md-3 control-label"></label>
@@ -108,9 +90,7 @@
             var role_menu = [];
             var role_id = $('#role_id').val();
             var role_name = $('#role_name').val();
-            var role_name_en = $('#role_name_en').val();
             var role_type = $('#role_type').val();
-            var role_platform = $('#role_platform').val();
             if (role_name == '') {
                 layer.msg('请填写角色名称',2,-1);
                 $("#role_name").focus();
@@ -135,7 +115,7 @@
             $.ajax({
                 type: 'POST',
                 url: '/role/save',
-                data: {'role_id':role_id,'role_name':role_name,'role_name_en':role_name_en,'role_menu':role_menu,'role_platform':role_platform},
+                data: {'role_id':role_id,'role_name':role_name,'role_menu':role_menu},
                 dataType:'json',
                 success: function(json) {
                     // alert(json.info);return;

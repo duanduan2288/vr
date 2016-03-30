@@ -21,31 +21,22 @@ class RoleController extends Controller
         $uid = Yii::$app->user->id;
         if(!empty($uid)){
 
-            $platform=(isset($_GET['type'])&&$_GET['type']=='2')?'注册商':'注册局';
-            $type=(isset($_GET['type'])&&$_GET['type']=='2')?'2':'1';
-            // $search_platform=(isset($_GET['search_platform']))?$_GET['search_platform']:'';
             $search_name=(isset($_GET['search_name']))?$_GET['search_name']:'';
 
             $querylist = new Query();
             $querylist->select('*')->from('auth_role');
-            $querylist->where("platform = '{$platform}'");
+            $querylist->where("1=1");
 
             if (!empty($search_name)) {
                 $querylist->andWhere("name LIKE '%{$search_name}%'");
             }
-            if ($type == '2') {
-                $querylist->andWhere("type = '系统创建'");
-            }
             $querylist->orderBy("id desc");
-
             $count = $querylist->count();
             $pages = new Pagination(['defaultPageSize'=>15,'totalCount'=>$count]);
             $querylist->offset($pages->offset)->limit($pages->limit);
             $roles = $querylist->all();
 
             return $this->render('index',array(
-                'platform' => $platform,
-                'type' => $type,
                 'roles' => $roles,
                 'pages'=>$pages,
                 'search_name'=>$search_name
@@ -62,14 +53,12 @@ class RoleController extends Controller
         {
             $id = '';
             $menus = $role_has_menus = array();
-            $platform=(isset($_GET['type'])&&$_GET['type']=='2')?'注册商':'注册局';
-            $type=(isset($_GET['type'])&&$_GET['type']=='2')?'2':'1';
             // 所有菜单
             $query = new Query();
 
             $query->select('id,name,parent_id')
-                    ->from('auth_menu')
-                    ->where("platform = '{$platform}' and deleted = '否'")
+                    ->from('{{%auth_menu}}')
+                    ->where("deleted = '否'")
                     ->orderBy("weight asc");
             $menus = $query->createCommand()->queryAll();
 
@@ -84,7 +73,7 @@ class RoleController extends Controller
                 }
                 $rolequery = new Query();
                 $rolequery  ->select('menu_id')
-                            ->from('auth_role_menu')
+                            ->from('{{%auth_role_menu}}')
                             ->where("role_id = $id");
                 $role_has_menus = $rolequery->createCommand()->queryColumn();
             }
@@ -110,7 +99,6 @@ class RoleController extends Controller
                 $role_name = htmlspecialchars(Yii::$app->request->post('role_name', ''));
                 $role_name_en = htmlspecialchars(Yii::$app->request->post('role_name_en', ''));
                 $role_menu = Yii::$app->request->post('role_menu', '');
-                $role_platform = Yii::$app->request->post('role_platform', '');
 
                 if (!empty($role_id)) {
 
@@ -119,7 +107,7 @@ class RoleController extends Controller
                         echo json_encode(array('info'=>'error','msg'=>'角色中文或英文名称已存在','data'=>array()));
                         Yii::$app->end();
                     }
-                    $info = AuthRole::find()->where("name = '{$role_name}' and id != {$role_id} and platform = '{$role_platform}' and registrar_id = 0")->one();
+                    $info = AuthRole::find()->where("name = '{$role_name}' and id != {$role_id}")->one();
                     if ($info) {
                         echo json_encode(array('info'=>'error','msg'=>'角色中文或英文名称已存在','data'=>array()));
                         Yii::$app->end();
@@ -127,7 +115,7 @@ class RoleController extends Controller
                     $msg = '编辑成功';
                 } else {
 
-                    $info = AuthRole::find()->where("name = '{$role_name}' and platform = '{$role_platform}' and registrar_id = 0")->one();
+                    $info = AuthRole::find()->where("name = '{$role_name}'")->one();
                     if ($info) {
                         echo json_encode(array('info'=>'error','msg'=>'角色中文或英文名称已存在1','data'=>array()));
                         Yii::$app->end();
@@ -139,9 +127,7 @@ class RoleController extends Controller
                 }
                 $model->name = $role_name;
                 $model->name_en = $role_name_en;
-                $model->platform = $role_platform;
                 $model->type = '系统创建';
-                $model->registrar_id = 0;
                 $model->creator = Yii::$app->user->id;
                 $model->created = new Expression('NOW()');
 
@@ -150,15 +136,7 @@ class RoleController extends Controller
                 try {
                     if ($role_id) {
                         $roles = AuthRole::findOne(['id'=>$role_id]);
-                        $connection->createCommand()->delete("auth_role_menu","role_id={$role_id}")->execute();
-                        //记录操作日志
-                        ServiceOperationLog::create_operation_log(json_encode($model->attributes),
-                            json_encode($roles->attributes),'修改角色','/role/create',$uid);
-
-                    }else{
-                        //记录操作日志
-                        ServiceOperationLog::create_operation_log(json_encode($model->attributes),
-                            '','添加角色','/role/create',$uid);
+                        $connection->createCommand()->delete("{{%auth_role_menu}}","role_id={$role_id}")->execute();
                     }
                     $model->save();
                     $r_id = $role_id ? $role_id : $model->id;
@@ -203,12 +181,9 @@ class RoleController extends Controller
             $transaction = $connection->beginTransaction();
             try {
                 $info = $this->loadModel($id);
-                $connection->createCommand()->delete("auth_role", "id={$id}")->execute();
-                $connection->createCommand()->delete("auth_role_menu", "role_id={$id}")->execute();
-                $connection->createCommand()->delete("auth_user_role", "role_id={$id}")->execute();
-
-                //记录操作日志
-                ServiceOperationLog::create_operation_log(json_encode('',$info->attributes),'删除角色','/role/delete',$uid);
+                $connection->createCommand()->delete("{{%auth_role}}", "id={$id}")->execute();
+                $connection->createCommand()->delete("{{%auth_role_menu}}", "role_id={$id}")->execute();
+                $connection->createCommand()->delete("{{%auth_user_role}}", "role_id={$id}")->execute();
 
                 $transaction->commit();
             } catch(Exception $e) {
@@ -230,13 +205,11 @@ class RoleController extends Controller
         $uid = Yii::$app->user->id;
         if(!empty($uid)){
             $id = Yii::$app->request->getQueryParam('id','');
-            $platform = (isset($_GET['type'])&&$_GET['type']=='2')?'注册商':'注册局';
-            $type = (isset($_GET['type'])&&$_GET['type']=='2')?'2':'1';
-            $table = (isset($_GET['type'])&&$_GET['type']=='2')?'registrar_user':'registry_user';
+
             $role_info = AuthRole::findOne($id);
             $query = new Query();
             $query->select('user_id')
-                    ->from('auth_user_role')
+                    ->from('{{%auth_user_role}}')
                     ->where("role_id = '{$id}'");
 
             $user_ids = $query->createCommand()->queryColumn();
@@ -244,7 +217,7 @@ class RoleController extends Controller
 
             $querylist = new Query();
             $querylist  ->select('*')
-                        ->from($table)
+                        ->from('{{%admin}}')
                         ->where(!empty($uids)?"id in ($uids)":"1=2")
                         ->orderBy("id desc");
 
@@ -254,8 +227,6 @@ class RoleController extends Controller
             $users = $querylist->all();
 
             return $this->render('role_user',array(
-                'platform' => $platform,
-                'type' => $type,
                 'role_info' => $role_info,
                 'users' => $users,
                 'pages'=>$pages
@@ -276,8 +247,8 @@ class RoleController extends Controller
       	// 所有菜单
         $query  = new Query();
         $query->select('id,name,parent_id')
-                ->from('auth_menu')
-                ->where("platform = '{$role->platform}' and deleted = '否'")
+                ->from('{{%auth_menu}}')
+                ->where("deleted = '否'")
                 ->orderBy("weight asc");
 
         $menus = $query->createCommand()->queryAll();
@@ -285,7 +256,7 @@ class RoleController extends Controller
         $querylist = new Query();
 
         $querylist->select('menu_id')
-                    ->from('auth_role_menu')
+                    ->from('{{%auth_role_menu}}')
                     ->where("role_id = $id");
         $role_has_menus = $querylist->createCommand()->queryColumn();
 
@@ -311,14 +282,12 @@ class RoleController extends Controller
                     try {
                         $query = new Query();
                         $query->select('menu_id')
-                                ->from('auth_role_menu')
+                                ->from('{{%auth_role_menu}}')
                                 ->where("role_id = {$role_id}")
                                 ->orderBy("weight asc");
                         $menus = $query->createCommand()->queryColumn();
 
-                        $connection->createCommand()->delete("auth_role_menu","role_id={$role_id}")->execute();
-                        //记录操作日志
-                        ServiceOperationLog::create_operation_log(json_encode($role_menu),json_encode($menus),'为角色分配菜单','/role/setting',$uid);
+                        $connection->createCommand()->delete("{{%auth_role_menu}}","role_id={$role_id}")->execute();
 
                         if (!empty($role_menu)) {
                             foreach ($role_menu as $key => $value) {

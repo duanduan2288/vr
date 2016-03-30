@@ -15,8 +15,8 @@
             <div class="portlet-title">
                 <div class="caption cap-head">
                     <i class="icon icon-cog"></i>
-                    <a>系统管理&nbsp;&nbsp;<i class="icon-angle-right"></a></i>
-                    <a href="#">注册局角色用户列表</a>
+                    <a>用户管理&nbsp;&nbsp;<i class="icon-angle-right"></a></i>
+                    <a href="#">角色用户列表</a>
                 </div>
                 <div class="tools">
                     <a href="javascript:location.reload();"><i class="icon-refresh"></i>刷新</a>&nbsp;&nbsp;

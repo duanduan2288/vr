@@ -14,8 +14,8 @@
             <div class="portlet-title">
                 <div class="caption cap-head">
                     <i class="icon icon-cog"></i>
-                    <a><?php echo $platform; ?>菜单&nbsp;&nbsp;<i class="icon-angle-right"></i></a>
-                    <a href="#">添加<?php echo $platform; ?>菜单</a>
+                    <a>用户管理&nbsp;&nbsp;<i class="icon-angle-right"></i></a>
+                    <a href="#">添加菜单</a>
                 </div>
                 <div class="tools">
                     <a href="javascript:location.reload();"><i class="icon-refresh"></i>刷新</a>&nbsp;&nbsp;
@@ -74,13 +74,6 @@
                                         <option value="<?php echo $item['id']; ?>" <?php echo $model->parent_id == $item['id'] ? 'selected' : '';?>><?php echo $item['platform'].':'.$item['name']; ?></option>
                                     <?php endforeach; ?>
                                 </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-3 control-label"><strong>所属平台<span class="required">*</span></strong></label>
-                            <div class="col-md-5">
-                                <input type="text" class="form-control required" value="<?php echo $platform; ?>" disabled  />
-                                <input type="hidden" name="Menu[platform]" value="<?php echo $platform; ?>"  />
                             </div>
                         </div>
                         <div class="form-group">

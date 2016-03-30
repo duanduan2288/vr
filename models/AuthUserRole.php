@@ -19,7 +19,7 @@ class AuthUserRole extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'vr_auth_user_role';
+        return '{{%auth_user_role}}';
     }
 
     /**

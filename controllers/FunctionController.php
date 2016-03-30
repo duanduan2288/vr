@@ -71,7 +71,6 @@ class FunctionController extends Controller
             }
             if(isset($_POST['Fun']))
             {
-                $before_edit = $id != '' ? json_encode($model->attributes) : '';
                 $model->attributes = $_POST['Fun'];
                 $model->created = new Expression('NOW()');
                 $model->modified = new Expression('NOW()');

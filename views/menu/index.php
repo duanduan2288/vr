@@ -25,8 +25,8 @@
             <div class="portlet-title">
                 <div class="caption cap-head">
                     <i class="icon icon-cog"></i>
-                    <a><?php echo $platform; ?>菜单&nbsp;&nbsp;<i class="icon-angle-right"></a></i>
-                    <a href="#"><?php echo $platform; ?>菜单列表</a>
+                    <a>用户管理&nbsp;&nbsp;<i class="icon-angle-right"></a></i>
+                    <a href="#">菜单列表</a>
                 </div>
                 <div class="tools">
                     <a href="/menu/create"><i class="icon-plus"></i>添加</a>&nbsp;&nbsp;
@@ -36,7 +36,6 @@
             </div>
             <div class="portlet-body form">
                 <form class="form-inline" role="form" method="get">
-                    <input type="hidden" name="type" value="<?php echo $type;?>">
                     <div class="form-body">
                         <div class="form-group">
                             <input type="text" class="form-control input-small" name="search_name" placeholder="请输入菜单名称" value="<?php echo $search_name;?>">
@@ -67,7 +66,6 @@
                             <th>是否默认</th>
                             <th>Target</th>
                             <th>删除</th>
-                            <th>所属平台</th>
                             <th>创建时间</th>
                             <th>操作</th>
                         </tr>
@@ -86,7 +84,6 @@
                                     <td><?php echo $list['default_menu']?></td>
                                     <td><?php echo $list['target']?></td>
                                     <td><span class="label label-sm label-<?php echo $list['deleted']=='否'?'success':'danger'; ?>"><?php echo $list['deleted']?></span></td>
-                                    <td><?php echo $list['platform']?></td>
                                     <td><?php echo $list['created']?></td>
                                     <td>
                                         <a class="delete" href="<?php echo Yii::$app->getUrlManager()->createUrl(['menu/create','id' => $list['id'],'type' => $type]); ?>">编辑</a>&nbsp;&nbsp;
