@@ -1,5 +1,6 @@
 <?php
 namespace app\controllers;
+use app\components\BaseController;
 use yii;
 use yii\web\Controller;
 use \yii\db\Query;
@@ -10,7 +11,7 @@ use app\models\AuthMenuFunction;
 use yii\db\Exception;
 use app\models\ServiceOperationLog;
 
-class MenuController extends Controller
+class MenuController extends BaseController
 {
     public function actionIndex()
     {

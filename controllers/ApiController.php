@@ -9,11 +9,12 @@
     namespace app\controllers;
 
 
+    use app\components\BaseController;
     use app\models\AuditData;
     use yii\db\Expression;
     use yii\web\Controller;
 
-    class ApiController extends Controller
+    class ApiController extends BaseController
     {
         public function acitonUpdateContact(){
             $contact_id = trim(Yii::$app->request->post('contact_id',''));

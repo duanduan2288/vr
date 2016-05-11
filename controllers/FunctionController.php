@@ -1,5 +1,6 @@
 <?php
 namespace app\controllers;
+use app\components\BaseController;
 use Yii;
 use yii\web\Controller;
 use \yii\db\Query;
@@ -9,7 +10,7 @@ use yii\db\Expression;
 use yii\db\Exception;
 use app\models\ServiceOperationLog;
 
-class FunctionController extends Controller
+class FunctionController extends BaseController
 {
     /**
      * function列表

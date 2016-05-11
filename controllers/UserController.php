@@ -1,5 +1,6 @@
 <?php
 namespace app\controllers;
+use app\components\BaseController;
 use app\models\User;
 use Yii;
 use yii\web\Controller;
@@ -24,7 +25,7 @@ use  app\models\UserManageScope;
 use app\models\UserAgentScope;
 use app\models\HelpAudit;
 
-class UserController extends Controller
+class UserController extends BaseController
 {
     /**
      * 管理员列表

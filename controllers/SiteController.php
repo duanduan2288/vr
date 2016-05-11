@@ -1,10 +1,11 @@
 <?php
     namespace app\controllers;
 
+    use app\components\BaseController;
+    use app\models\Activity;
     use app\models\User;
     use Yii;
     use yii\filters\AccessControl;
-    use yii\web\Controller;
     use yii\filters\VerbFilter;
     use app\models\RegistryUser;
     use app\models\Service;
@@ -16,7 +17,7 @@
     /**
      * Site controller
      */
-    class SiteController extends Controller
+    class SiteController extends BaseController
     {
         public $enableCsrfValidation = false;
         /**

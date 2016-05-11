@@ -9,18 +9,20 @@
 namespace app\controllers;
 
 
+use app\components\BaseController;
 use app\models\Suggest;
 use yii\data\Pagination;
 use yii\web\Controller;
 use Yii;
 
-class AppUserController extends Controller
+class AppUserController extends BaseController
 {
 	/**
 	 * 用户反馈列表
 	 */
 	public function actionSuggest(){
 
+		$this->layout
 		$suggest = Suggest::find()->where("1=1");
 		$start_date = Yii::$app->request->get('start_date',date('Y-m-01'));
 		$end_date = Yii::$app->request->get('end_date',date('Y-m-d'));

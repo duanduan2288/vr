@@ -19,6 +19,7 @@ use Yii;
  */
 class Activity extends \yii\db\ActiveRecord
 {
+    use Author;
     /**
      * @inheritdoc
      */

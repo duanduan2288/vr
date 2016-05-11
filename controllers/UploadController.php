@@ -6,6 +6,7 @@
      * Time: 11:47
      */
 namespace app\controllers;
+use app\components\BaseController;
 use yii;
 use yii\web\Controller;
 use yii\db\Expression;
@@ -13,7 +14,7 @@ use app\components\Util;
 use app\models\Service;
 use app\models\UploadFile;
 
-    class UploadController extends Controller{
+    class UploadController extends BaseController{
 
         /**
          * 上传

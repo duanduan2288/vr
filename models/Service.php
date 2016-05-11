@@ -34,7 +34,7 @@ class Service {
 
     public static function create_password($password)
     {
-        return md5($password);
+        return strtoupper(md5($password));
     }
 
     /**

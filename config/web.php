@@ -21,7 +21,7 @@ $config = [
         ],
         'db' =>  [
             'class'     => 'yii\db\Connection',
-            'dsn'       => 'mysql:host=localhost;dbname=vr',
+            'dsn'       => 'mysql:host=localhost;dbname=vr_all',
             'username'  => 'root',
             'password'  => '',
             'charset'   => 'utf8',
